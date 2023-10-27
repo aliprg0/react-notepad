@@ -4,13 +4,12 @@ import { addNote, deleteNote } from './redux/noteSlice'
 
 const App = () => {
   const notes = useSelector((state) => state.note);
-  console.log(notes)
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     const title = e.target.elements.title.value;
     if (title.length < 31){
       e.preventDefault();
-      const index = notes.lengh + 1;
+      const index = notes.length + 1;
       dispatch(addNote({title,index}));
       e.target.elements.title.value = '';
     }
