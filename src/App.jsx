@@ -7,11 +7,18 @@ const App = () => {
   console.log(notes)
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
+    const title = e.target.elements.title.value;
+    if (title.length < 31){
       e.preventDefault();
-      const title = e.target.elements.title.value;
       const index = notes.lengh + 1;
       dispatch(addNote({title,index}));
       e.target.elements.title.value = '';
+    }
+    else {
+      e.preventDefault()
+      alert("Too long")
+    }
+
   }
   return (
     <div className='flex w-full justify-center items-center flex-col space-y-6'>
@@ -27,7 +34,8 @@ const App = () => {
       </div>
       <div className='space-y-8'>
         {notes.map((note, index) => (
-          <div key={index} className='w-72 h-[4rem] bg-green-400 shadow-lg rounded-full flex flex-row justify-between px-5 items-center'>
+          <div key={index} className='w-72 h-[4rem] bg-green-400 shadow-lg rounded-full flex flex-row
+            justify-between px-5 items-center min-w-fit'>
             <h2 className='rounded-full bg-yellow-100 p-2'>{note.title}</h2>
             <button onClick={() => dispatch(deleteNote(index))}>Delete</button>
           </div>
